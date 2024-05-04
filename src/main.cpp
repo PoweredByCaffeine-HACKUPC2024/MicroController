@@ -2,12 +2,10 @@
 #include "wifi_connection.h"
 #include <ky015.h>
 #include <ky026.h>
-<<<<<<< Updated upstream
+#include <ky028.h>
 #include "definitions.h"
 #include "influx.h"
-=======
-#include <ky028.h>
->>>>>>> Stashed changes
+
 
 // put function declarations here:
 uint8_t AnalogPin = 33;
