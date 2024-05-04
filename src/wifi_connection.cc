@@ -124,20 +124,10 @@ void WiFiConnection::handleClient(WiFiClient client)
     }
 }
 
-void WiFiConnection::startServer(int port)
+WiFiServer WiFiConnection::startServer(int port)
 {
     WiFiServer server(port);
     server.begin();
     Serial.println("Server started");
-    while (true)
-    {
-        WiFiClient client = server.available();
-        if (!client)
-        {
-            continue;
-        }
-        Serial.println("New client connected");
-        handleClient(client);
-        Serial.println("Client disconnected");
-    }
+    return server;
 }

@@ -6,11 +6,11 @@
 #include "definitions.h"
 #include "influx.h"
 
-
 // put function declarations here:
 uint8_t AnalogPin = 33;
 uint8_t DigitalPin = 32;
 ky028 TempSensor(AnalogPin, DigitalPin);
+WiFiServer server;
 
 void setup()
 {
@@ -20,20 +20,43 @@ void setup()
   delay(1000);
   WiFiConnection::connectToWiFi();
   Influx::sendMesure("test", "testing", "test1", 1.f);
+  server = WiFiConnection::startServer(SERVER_PORT);
 }
 
 void loop()
 {
   printf("Entering loop part\n");
   // put your main code here, to run repeatedly:
+  int counter = 0;
+  uint32_t lastTime = millis();
   while (1)
   {
-    delay(2500);
-    // TODO update the sensor data
-    TempSensor.readAnalog();
-    printf("Temperature: %d\n", TempSensor.getAnalogValue());
+    uint32_t currentTime = millis();
+    if ((currentTime - lastTime) > 1000)
+    {
+      lastTime = currentTime;
+      if (counter == 5)
+      {
+        counter = 0;
+        TempSensor.readAnalog();
+        int temperature = TempSensor.getAnalogValue();
+        printf("Temperature: %d\n", temperature);
+        Influx::sendMesure("test", "testing", "test1", temperature);
+      }
+      else
+      {
+        counter++;
+      }
+    }
 
-    // TODO make the api call
+    WiFiClient client = server.available();
+    if (!client)
+    {
+      continue;
+    }
+    Serial.println("New client connected");
+    WiFiConnection::handleClient(client);
+    Serial.println("Client disconnected");
   }
 }
 

@@ -22,5 +22,5 @@ public:
 
     void static handleClient(WiFiClient client);
 
-    static void startServer(int port);
+    static WiFiServer startServer(int port);
 };
