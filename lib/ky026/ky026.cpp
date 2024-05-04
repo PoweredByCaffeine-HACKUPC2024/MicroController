@@ -18,48 +18,41 @@ ky026::ky026(uint8_t analogPin, uint8_t digitalPin)
 
 /**!
  *  @brief  Instanciates a new ky026 class
- *  @param  analogPin     Pin number the analog pin of the KY-026 is connected to.
+ *  @param  pin     Pin number for the KY-026 is connected to.
+ *  @param  type    Char to determine analog or digital pin
  *
  *  @note   Sets analogValue to 0 and digitalValue to LOW
- *  @note   Sets digitalPin to NULL
+ *  @note   Sets digitalPin to 0
  *
  */
-ky026::ky026(uint8_t analogPin)
+ky026::ky026(uint8_t pin, char type)
 {
-    this->analogPin = analogPin;
-    this->digitalPin = NULL;
-    this->analogValue = 0;
-    this->digitalValue = LOW;
-}
-
-/**!
- *  @brief  Instanciates a new ky026 class
- *  @param  digitalPin     Pin number the digital pin of the KY-026 is connected to.
- *
- *  @note   Sets analogValue to 0 and digitalValue to LOW
- *  @note   Sets analogPin to NULL
- *
- */
-ky026::ky026(uint8_t digitalPin)
-{
-    this->analogPin = NULL;
-    this->digitalPin = digitalPin;
+    if (type == 'd' || type == 'D')
+    {
+        this->digitalPin = pin;
+        this->analogPin = 0;
+    }
+    else if (type == 'a' || type == 'A')
+    {
+        this->analogPin = pin;
+        this->digitalPin = 0;
+    }
     this->analogValue = 0;
     this->digitalValue = LOW;
 }
 
 /**!
  *  @brief  Setup sensor pins
- *  @note   If analogPin is not NULL; sets analogPin to INPUT.
- *  @note   If digitalPin is not NULL; sets digitalPin to INPUT.
+ *  @note   If analogPin is not 0; sets analogPin to INPUT.
+ *  @note   If digitalPin is not 0; sets digitalPin to INPUT.
  */
 void ky026::setup()
 {
-    if (this->analogPin != NULL)
+    if (this->analogPin != 0)
     {
         pinMode(this->analogPin, INPUT);
     }
-    if (this->digitalPin != NULL)
+    if (this->digitalPin != 0)
     {
         pinMode(this->digitalPin, INPUT);
     }
@@ -71,7 +64,7 @@ void ky026::setup()
  */
 int8_t ky026::readDigital()
 {
-    if (this->digitalPin != NULL)
+    if (this->digitalPin != 0)
     {
         this->digitalValue = digitalRead(this->digitalPin);
         return 0;
@@ -87,7 +80,7 @@ int8_t ky026::readDigital()
  */
 int8_t ky026::readAnalog()
 {
-    if (this->analogPin != NULL)
+    if (this->analogPin != 0)
     {
         this->analogPin = analogRead(this->analogPin);
         return 0;

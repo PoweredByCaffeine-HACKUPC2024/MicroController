@@ -13,8 +13,7 @@ private:
 
 public:
     ky026(uint8_t analogPin, uint8_t digitalPin);
-    ky026(uint8_t analogPin);
-    ky026(uint8_t digitalPin);
+    ky026(uint8_t pin, char type);
 
     int8_t readDigital();
     int8_t readAnalog();
