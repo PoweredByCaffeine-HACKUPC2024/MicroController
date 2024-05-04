@@ -82,7 +82,7 @@ int8_t ky026::readAnalog()
 {
     if (this->analogPin != 0)
     {
-        this->analogPin = analogRead(this->analogPin);
+        this->analogValue = analogRead(this->analogPin);
         return 0;
     }
     else
