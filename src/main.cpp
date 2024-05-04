@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include "wifi_connection.h"
+#include <ky015.h>
+#include <ky026.h>
 #include "definitions.h"
 #include "influx.h"
 
