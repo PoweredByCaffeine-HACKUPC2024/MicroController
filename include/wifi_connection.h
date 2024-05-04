@@ -19,4 +19,8 @@ public:
 
     static void sendRequest(String url, String method, std::map<String, String> headers, String body);
     static void simpleSendRequest(String url, String method, std::map<String, String> headers, String body);
+
+    void static handleClient(WiFiClient client);
+
+    static void startServer(int port);
 };
