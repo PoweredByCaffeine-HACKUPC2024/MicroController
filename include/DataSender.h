@@ -16,12 +16,13 @@ public:
     DataSender();
     ~DataSender();
 
+    void initialize();
     void startTransport();
     void startClient();
     void addToSeries(TimeSeries ts);
     void setRequest();
-    template <typename T>
-    void addToSeries(const char *name, T value, const char *labels = "");
+
+    void addValueToSeries(const char *name, double value, const char *labels = "");
 
     void sendData();
 };

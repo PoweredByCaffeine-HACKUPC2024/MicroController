@@ -4,12 +4,15 @@
 #include <ky026.h>
 #include <ky028.h>
 #include "definitions.h"
+#include "DataSender.h"
 
 // put function declarations here:
 uint8_t AnalogPin = 33;
 uint8_t DigitalPin = 32;
 ky028 TempSensor(AnalogPin, DigitalPin);
 WiFiServer server;
+DataSender dataSender;
+TimeSeries ts = TimeSeries(5, "temperature", "job=\"esp32-test\"");
 
 void setup()
 {
@@ -19,6 +22,10 @@ void setup()
   delay(1000);
   WiFiConnection::connectToWiFi();
   server = WiFiConnection::startServer(SERVER_PORT);
+  dataSender = DataSender();
+  dataSender.initialize();
+  dataSender.addToSeries(ts);
+  printf("Exiting setup part\n");
 }
 
 void loop()
@@ -37,8 +44,12 @@ void loop()
       {
         counter = 0;
         TempSensor.readAnalog();
-        int temperature = TempSensor.getAnalogValue();
-        printf("Temperature: %d\n", temperature);
+        float value = TempSensor.getAnalogValue();
+        const char *name = ts.getName();
+        const char *lable = name;
+        dataSender.addValueToSeries(name, double(value), lable);
+
+        printf("value: %f\n", value);
       }
       else
       {

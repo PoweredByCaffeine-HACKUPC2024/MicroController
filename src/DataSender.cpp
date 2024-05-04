@@ -19,6 +19,16 @@ DataSender::DataSender() : req(series.size(), 1024)
     client.setDebug(Serial); // Remove this line to disable debug logging of the client.
 }
 
+DataSender::~DataSender()
+{
+}
+
+void DataSender::initialize()
+{
+    startTransport();
+    startClient();
+}
+
 void DataSender::startTransport()
 {
     if (!transport.begin())
@@ -66,8 +76,7 @@ void DataSender::sendData()
         ts.resetSamples();
 }
 
-template <typename T>
-inline void DataSender::addToSeries(const char *name, T value, const char *labels)
+inline void DataSender::addValueToSeries(const char *name, double value, const char *labels)
 {
     for (auto &ts : series)
     {
