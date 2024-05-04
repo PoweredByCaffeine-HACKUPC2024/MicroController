@@ -1,18 +1,13 @@
 #include <Arduino.h>
-#include <WiFi.h> // Include the WiFi library
-
-#define SSID "HACKUPC2024B"   // Your WiFi network SSID
-#define password "Biene2024!" // Your WiFi network password
-#define WIFI_TIMEOUT_MS 20000
+#include "wifi_connection.h"
 
 // put function declarations here:
-void connectToWiFi();
 
 void setup()
 {
   Serial.begin(9600);
   delay(1000);
-  connectToWiFi();
+  WiFiConnection::connectToWiFi();
 }
 
 void loop()
@@ -27,26 +22,3 @@ void loop()
 }
 
 // put function definitions here:
-void connectToWiFi()
-{
-  WiFi.mode(WIFI_STA); // Optional
-  Serial.println("\nConnecting to WiFi " + String(SSID) + "...");
-  WiFi.begin(SSID, password);
-
-  unsigned long startAttemptTime = millis();
-  while (WiFi.status() != WL_CONNECTED && millis() - startAttemptTime < WIFI_TIMEOUT_MS)
-  {
-    delay(1000);
-    Serial.print(".");
-  }
-
-  if (WiFi.status() != WL_CONNECTED)
-  {
-    Serial.println("\nFailed to connect to WiFi.");
-  }
-  else
-  {
-    Serial.print("\nConnected to WiFi!\nIP address: ");
-    Serial.println(WiFi.localIP());
-  }
-}
