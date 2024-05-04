@@ -4,7 +4,6 @@
 #include <ky026.h>
 #include <ky028.h>
 #include "definitions.h"
-#include "influx.h"
 
 // put function declarations here:
 uint8_t AnalogPin = 33;
@@ -19,7 +18,6 @@ void setup()
   Serial.begin(9600);
   delay(1000);
   WiFiConnection::connectToWiFi();
-  Influx::sendMesure("test", "testing", "test1", 1.f);
   server = WiFiConnection::startServer(SERVER_PORT);
 }
 
@@ -41,7 +39,6 @@ void loop()
         TempSensor.readAnalog();
         int temperature = TempSensor.getAnalogValue();
         printf("Temperature: %d\n", temperature);
-        Influx::sendMesure("test", "testing", "test1", temperature);
       }
       else
       {
