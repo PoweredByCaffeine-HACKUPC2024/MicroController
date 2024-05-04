@@ -3,6 +3,9 @@
 
 #include <Arduino.h>
 
+#define VOLTAGEVALUE_KY026 5.0
+#define DATARANGE_KY026 4095.0
+
 class ky026
 {
 private:
@@ -18,7 +21,7 @@ public:
     int8_t readDigital();
     int8_t readAnalog();
 
-    int getAnalogValue();
+    float getAnalogValue();
     int getDigitalValue();
 
     void setup();
