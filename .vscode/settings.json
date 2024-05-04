@@ -4,5 +4,6 @@
         "Biene",
         "HACKUPC",
         "HCKUPC"
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "enabled"
 }

@@ -2,6 +2,8 @@
 #include "wifi_connection.h"
 #include <ky015.h>
 #include <ky026.h>
+#include "definitions.h"
+#include "influx.h"
 
 // put function declarations here:
 
@@ -10,6 +12,7 @@ void setup()
   Serial.begin(9600);
   delay(1000);
   WiFiConnection::connectToWiFi();
+  Influx::sendMesure("test", "testing", "test1", 1.f);
 }
 
 void loop()
