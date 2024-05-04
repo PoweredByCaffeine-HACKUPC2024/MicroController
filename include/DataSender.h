@@ -7,10 +7,10 @@
 class DataSender
 {
 private:
-    PromLokiTransport transport;
     WriteRequest req;
-    std::list<TimeSeries> series;
+    std::list<TimeSeries *> series;
     PromClient client;
+    PromLokiTransport transport;
 
 public:
     DataSender();
@@ -19,8 +19,9 @@ public:
     void initialize();
     void startTransport();
     void startClient();
-    void addToSeries(TimeSeries ts);
+    void addToSeries(TimeSeries *ts);
     void setRequest();
+    PromLokiTransport getTransport();
 
     void addValueToSeries(const char *name, double value, const char *labels = "");
 

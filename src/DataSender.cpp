@@ -51,7 +51,7 @@ void DataSender::startClient()
     }
 }
 
-void DataSender::addToSeries(TimeSeries ts)
+void DataSender::addToSeries(TimeSeries *ts)
 {
     series.push_back(ts);
 }
@@ -60,8 +60,13 @@ void DataSender::setRequest()
 {
     req = WriteRequest(series.size(), 1024);
     for (auto &ts : series)
-        req.addTimeSeries(ts);
+        req.addTimeSeries(*ts);
     req.setDebug(Serial); // Remove this line to disable debug logging of the write request serialization and compression.
+}
+
+PromLokiTransport DataSender::getTransport()
+{
+    return transport;
 }
 
 void DataSender::sendData()
@@ -73,18 +78,18 @@ void DataSender::sendData()
         Serial.println(client.errmsg);
     }
     for (auto &ts : series)
-        ts.resetSamples();
+        ts->resetSamples();
 }
 
 inline void DataSender::addValueToSeries(const char *name, double value, const char *labels)
 {
     for (auto &ts : series)
     {
-        if (ts.getName() == name)
+        if (ts->getName() == name)
         {
-            if (!ts.addSample(transport.getTimeMillis(), value))
+            if (!ts->addSample(transport.getTimeMillis(), value))
             {
-                Serial.println(ts.errmsg);
+                Serial.println(ts->errmsg);
             }
             return;
         }

@@ -30,9 +30,9 @@ TimeSeries ts2(5, "heap_free_bytes", "{job=\"esp32-test\",host=\"esp32\",foo=\"b
 
 int loopCounter = 0;
 
-void setupDemo()
+void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(9600);
 
     // Wait 5s for serial connection or continue without it
     // some boards like the esp32 will run whether or not the
@@ -87,7 +87,7 @@ void setupDemo()
     Serial.println(freeMemory());
 };
 
-void loopDemo()
+void loop()
 {
     int64_t time;
     time = transport.getTimeMillis();

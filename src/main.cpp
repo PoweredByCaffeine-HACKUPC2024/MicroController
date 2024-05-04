@@ -14,7 +14,7 @@ WiFiServer server;
 DataSender dataSender;
 TimeSeries ts = TimeSeries(5, "temperature", "job=\"esp32-test\"");
 
-void setup()
+void setupDemo()
 {
   // Setup sensor pins
   TempSensor.setup();
@@ -24,11 +24,11 @@ void setup()
   server = WiFiConnection::startServer(SERVER_PORT);
   dataSender = DataSender();
   dataSender.initialize();
-  dataSender.addToSeries(ts);
+  dataSender.addToSeries(&ts);
   printf("Exiting setup part\n");
 }
 
-void loop()
+void loopDemo()
 {
   printf("Entering loop part\n");
   // put your main code here, to run repeatedly:
@@ -45,11 +45,13 @@ void loop()
         counter = 0;
         TempSensor.readAnalog();
         float value = TempSensor.getAnalogValue();
-        const char *name = ts.getName();
-        const char *lable = name;
-        dataSender.addValueToSeries(name, double(value), lable);
-
+        if (!ts.addSample(dataSender.getTransport().getTimeMillis(), value))
+        {
+          Serial.println(ts.errmsg);
+        }
+        printf("Reached successfully\n");
         printf("value: %f\n", value);
+        dataSender.sendData();
       }
       else
       {
