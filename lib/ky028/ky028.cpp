@@ -1,3 +1,11 @@
+/*!
+ *  @file ky028.cpp
+ *
+ *  Digital temperature sensor library for KY-028
+ *
+ *  This is a library for a digital temperature sensor using a thermistor
+ *
+ */
 #include "ky028.h"
 
 /**!
@@ -92,11 +100,12 @@ int8_t ky028::readAnalog()
 }
 
 /**!
- *  @brief  Returns the last value read in analogPin.
+ *  @brief  Returns the last value read in analogPin as the voltage value.
  */
-int ky028::getAnalogValue()
+float ky028::getAnalogValue()
 {
-    return this->analogValue;
+    float data = this->analogValue * (VOLTAGEVALUE_KY028 / DATARANGE_KY028);
+    return data;
 }
 
 /**!
@@ -105,4 +114,14 @@ int ky028::getAnalogValue()
 int ky028::getDigitalValue()
 {
     return this->digitalValue;
+}
+
+/**!
+ *  @brief  Returns analogValue as temperature in Celsius
+ */
+float ky028::getTemperature()
+{
+    float data = (this->getAnalogValue() * ((MAXVALUE_KY028 - MINVALUE_KY028) / VOLTAGEVALUE_KY028)) + (MINVALUE_KY028);
+
+    return data;
 }

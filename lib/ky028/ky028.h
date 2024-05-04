@@ -3,6 +3,11 @@
 
 #include <Arduino.h>
 
+#define VOLTAGEVALUE_KY028 5.0
+#define DATARANGE_KY028 4095.0
+#define MINVALUE_KY028 -55.0
+#define MAXVALUE_KY028 125.0
+
 class ky028
 {
 private:
@@ -18,9 +23,10 @@ public:
     int8_t readDigital();
     int8_t readAnalog();
 
-    int getAnalogValue();
+    float getAnalogValue();
     int getDigitalValue();
 
+    float getTemperature();
     void setup();
 };
 

@@ -1,3 +1,11 @@
+/*!
+ *  @file ky026.cpp
+ *
+ *  Flame detector IR sensor library for KY-026
+ *
+ *  This is a library for a flame detector sensor using IR light sensor.
+ *
+ */
 #include "ky026.h"
 
 /**!
@@ -92,11 +100,12 @@ int8_t ky026::readAnalog()
 }
 
 /**!
- *  @brief  Returns the last value read in analogPin.
+ *  @brief  Returns the last value read in analogPin as the voltage value.
  */
-int ky026::getAnalogValue()
+float ky026::getAnalogValue()
 {
-    return this->analogValue;
+    float data = this->analogValue * (VOLTAGEVALUE_KY026 / DATARANGE_KY026);
+    return data;
 }
 
 /**!
