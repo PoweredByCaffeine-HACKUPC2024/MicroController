@@ -12,11 +12,5 @@
         "RETRYABLE",
         "Ssid"
     ],
-<<<<<<< Updated upstream
     "C_Cpp.errorSquiggles": "enabled"
-=======
-    "files.associations": {
-        "random": "cpp"
-    }
->>>>>>> Stashed changes
 }
