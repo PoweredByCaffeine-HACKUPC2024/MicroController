@@ -21,3 +21,9 @@ uint8_t Temp_Hum_Pin = 25;
 uint8_t DHTType = 11U;
 // Buzzer variables
 uint8_t Buzzer_Pin = 26;
+
+// Server variables
+#define SERVER_PORT 80 // Server port
+
+// Sensor variables
+#define builtInLedPin 2
