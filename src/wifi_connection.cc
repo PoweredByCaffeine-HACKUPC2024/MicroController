@@ -119,9 +119,28 @@ void WiFiConnection::handleClient(WiFiClient client)
 {
     while (client.connected())
     {
-        String line = client.readStringUntil('\n');
-        Serial.println(line);
+        if (client.available())
+        {
+            // Read the request
+            String request = client.readStringUntil('\r');
+            // Check if it's the request you want to handle
+            if (request.indexOf("GET /foo") != -1)
+            {
+                // Perform foo function
+                // foo();
+            }
+            // Send response to client
+            client.println("HTTP/1.1 200 OK");
+            client.println("Content-Type: text/html");
+            client.println();
+            client.println("<h1>Hello, World!</h1>");
+            // Break out of the loop after handling the request
+            break;
+        }
+        delay(1);
     }
+    // Close the connection
+    client.stop();
 }
 
 WiFiServer WiFiConnection::startServer(int port)
