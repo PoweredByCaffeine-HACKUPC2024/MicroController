@@ -12,7 +12,7 @@ void setup()
   Serial.begin(9600);
   delay(1000);
   WiFiConnection::connectToWiFi();
-  Influx::sendMesure("test", "testing", "test1", 1.f);
+  Influx::sendMesure(INFLUXDB_BUCKET, "testing", "test1", 1.f);
 }
 
 void loop()
@@ -20,7 +20,7 @@ void loop()
   // put your main code here, to run repeatedly:
   while (1)
   {
-    sleep(5 * 1000);
+    delay(5000);
     // TODO update the sensor data
     // TODO make the api call
   }
