@@ -25,7 +25,7 @@
 #define TEMP_HUM_PIN 32u
 #define DHTTYPE 11U
 // Photoresistor Sensor variables
-#define PHOTO_AN_PIN 34u
+#define PHOTO_AN_PIN 35u
 #define PHOTO_DG_PIN 0u
 // Buzzer variables
 #define BUZZER_PIN 33u
