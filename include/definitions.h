@@ -9,3 +9,15 @@
 #define INFLUXDB_HOST INFLUXDB_URL
 #define ORGANIZATION_ID "0ca6ed4e7a7d9571"
 #define INFLUXDB_BUCKET "HACKUPC2024"
+
+// Flame Sensor variables
+uint8_t Flame_An_Pin = 32;
+uint8_t Flame_Dg_Pin = 0;
+// Sound Sensor variables
+uint8_t Sound_An_Pin = 33;
+uint8_t Sound_Dg_Pin = 0;
+// Temp & Humidity Sensor variables
+uint8_t Temp_Hum_Pin = 25;
+uint8_t DHTType = 11U;
+// Buzzer variables
+uint8_t Buzzer_Pin = 26;
