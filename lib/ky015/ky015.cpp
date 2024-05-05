@@ -1,3 +1,14 @@
+/*!
+ *  @file ky015.cpp
+ *
+ *  Temperature & Humidity Sensor Library for KY-015
+ *
+ *  This is a library for DHT series of low cost temperature/humidity sensors.
+ *
+ *  You must have Adafruit Unified Sensor Library library installed to use this
+ * class.
+ *
+ */
 #include "ky015.h"
 
 /*!
