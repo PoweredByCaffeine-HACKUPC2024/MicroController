@@ -114,3 +114,20 @@ void WiFiConnection::simpleSendRequest(String url, String method, std::map<Strin
 
     client.end();
 }
+
+void WiFiConnection::handleClient(WiFiClient client)
+{
+    while (client.connected())
+    {
+        String line = client.readStringUntil('\n');
+        Serial.println(line);
+    }
+}
+
+WiFiServer WiFiConnection::startServer(int port)
+{
+    WiFiServer server(port);
+    server.begin();
+    Serial.println("Server started");
+    return server;
+}
