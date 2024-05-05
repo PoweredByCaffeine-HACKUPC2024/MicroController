@@ -9,3 +9,6 @@
 #define INFLUXDB_HOST INFLUXDB_URL
 #define ORGANIZATION_ID "0ca6ed4e7a7d9571"
 #define INFLUXDB_BUCKET "HACKUPC2024"
+
+// Server variables
+#define SERVER_PORT 80 // Server port

@@ -13,6 +13,7 @@ void setup()
   delay(1000);
   WiFiConnection::connectToWiFi();
   Influx::sendMesure(INFLUXDB_BUCKET, "testing", "test1", 1.f);
+  WiFiConnection::startServer(SERVER_PORT);
 }
 
 void loop()
