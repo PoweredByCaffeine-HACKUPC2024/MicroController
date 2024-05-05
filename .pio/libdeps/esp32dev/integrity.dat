@@ -1,0 +1,6 @@
+adafruit/DHT sensor library@^1.4.6
+grafana/SnappyProto@^0.1.2
+adafruit/Adafruit Unified Sensor@^1.1.14
+Wifi
+arduino-libraries/ArduinoHttpClient@^0.6.0
+grafana/PromLokiTransport@^0.2.2
