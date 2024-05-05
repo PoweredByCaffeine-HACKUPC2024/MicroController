@@ -6,15 +6,20 @@
 #include "influx.h"
 
 // put function declarations here:
-WiFiServer server;
+
+AsyncWebServer server(SERVER_PORT);
 
 void setup()
 {
   Serial.begin(9600);
+  pinMode(builtInLedPin, OUTPUT);
   delay(1000);
   WiFiConnection::connectToWiFi();
   Influx::sendMesure(INFLUXDB_BUCKET, "testing", "test1", 1.f);
-  server = WiFiConnection::startServer(SERVER_PORT);
+  // config the server
+  printf("Starting server on port %d\n", SERVER_PORT);
+  WiFiConnection::startServer(server);
+  printf("Server started\n");
 }
 
 void loop()
@@ -25,16 +30,7 @@ void loop()
     delay(5000);
     // TODO update the sensor data
     // TODO make the api call
-
-    WiFiClient client = server.available();
-    if (client)
-    {
-      Serial.println("New client connected");
-      // Handle the client
-      WiFiConnection::handleClient(client);
-      Serial.println("Client disconnected");
-    }
   }
-}
 
-// put function definitions here:
+  // put function definitions here:
+}

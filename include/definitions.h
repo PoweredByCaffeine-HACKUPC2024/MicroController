@@ -12,3 +12,6 @@
 
 // Server variables
 #define SERVER_PORT 80 // Server port
+
+// Sensor variables
+#define builtInLedPin 2

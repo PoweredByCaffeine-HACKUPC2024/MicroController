@@ -119,34 +119,31 @@ void WiFiConnection::handleClient(WiFiClient client)
 {
     while (client.connected())
     {
-        if (client.available())
-        {
-            // Read the request
-            String request = client.readStringUntil('\r');
-            // Check if it's the request you want to handle
-            if (request.indexOf("GET /foo") != -1)
-            {
-                // Perform foo function
-                // foo();
-            }
-            // Send response to client
-            client.println("HTTP/1.1 200 OK");
-            client.println("Content-Type: text/html");
-            client.println();
-            client.println("<h1>Hello, World!</h1>");
-            // Break out of the loop after handling the request
-            break;
-        }
-        delay(1);
     }
     // Close the connection
     client.stop();
 }
 
-WiFiServer WiFiConnection::startServer(int port)
+void WiFiConnection::startServer(AsyncWebServer &server)
 {
-    WiFiServer server(port);
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(200, "text/plain", "Hello World"); });
+    // Turning the built-in LED on
+
+    server.on("/builtinLed/on", HTTP_GET, [](AsyncWebServerRequest *request)
+              {
+                  digitalWrite(builtInLedPin, HIGH);
+
+                  request->send(200, "text/plain", "Built-in LED turned on"); });
+
+    // Turning the built-in LED off
+
+    server.on("/builtinLed/off", HTTP_GET, [](AsyncWebServerRequest *request)
+              {
+                  digitalWrite(builtInLedPin, LOW);
+
+                  request->send(200, "text/plain", "Built-in LED turned off");
+              });
+
     server.begin();
-    Serial.println("Server started");
-    return server;
 }
