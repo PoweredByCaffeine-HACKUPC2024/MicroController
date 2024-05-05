@@ -154,11 +154,11 @@ void WiFiConnection::startServer(AsyncWebServer &server)
               {
                BuzzerActive = false;
 
-               request ->send(200, "text/plain", "Buzzer Activated"); });
+               request ->send(200, "text/plain", "Buzzer Deactivated"); });
 
     server.on("/BuzzerAct/set-frequency", HTTP_POST, [](AsyncWebServerRequest *request)
               {
-                  int number = request->arg("frequency").toInt();
+                  int number = request->getParam("frequency")->value().toInt();
                   buzzerFrequency = number;
 
                   request->send(200, "text/plain", "Frequency set to: " + String(buzzerFrequency)); });
