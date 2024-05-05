@@ -21,3 +21,8 @@
 #define DHTTYPE 11U
 // Buzzer variables
 #define BUZZER_PIN 26u
+// Server variables
+#define SERVER_PORT 80 // Server port
+// Sensor variables
+#define builtInLedPin 2
+

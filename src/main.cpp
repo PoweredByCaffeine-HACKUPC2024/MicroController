@@ -7,12 +7,19 @@
 
 // put function declarations here:
 
+AsyncWebServer server(SERVER_PORT);
+
 void setup()
 {
   Serial.begin(9600);
+  pinMode(builtInLedPin, OUTPUT);
   delay(1000);
   WiFiConnection::connectToWiFi();
   Influx::sendMesure(INFLUXDB_BUCKET, "testing", "test1", 1.f);
+  // config the server
+  printf("Starting server on port %d\n", SERVER_PORT);
+  WiFiConnection::startServer(server);
+  printf("Server started\n");
 }
 
 void loop()
@@ -24,6 +31,6 @@ void loop()
     // TODO update the sensor data
     // TODO make the api call
   }
-}
 
-// put function definitions here:
+  // put function definitions here:
+}

@@ -7,6 +7,7 @@
 #include <mbedtls/ssl.h>
 #include <mbedtls/error.h>
 #include "definitions.h"
+#include <ESPAsyncWebServer.h>
 
 class WiFiConnection
 {
@@ -22,5 +23,5 @@ public:
 
     void static handleClient(WiFiClient client);
 
-    static WiFiServer startServer(int port);
+    static void startServer(AsyncWebServer &server);
 };

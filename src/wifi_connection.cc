@@ -119,15 +119,31 @@ void WiFiConnection::handleClient(WiFiClient client)
 {
     while (client.connected())
     {
-        String line = client.readStringUntil('\n');
-        Serial.println(line);
     }
+    // Close the connection
+    client.stop();
 }
 
-WiFiServer WiFiConnection::startServer(int port)
+void WiFiConnection::startServer(AsyncWebServer &server)
 {
-    WiFiServer server(port);
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(200, "text/plain", "Hello World"); });
+    // Turning the built-in LED on
+
+    server.on("/builtinLed/on", HTTP_GET, [](AsyncWebServerRequest *request)
+              {
+                  digitalWrite(builtInLedPin, HIGH);
+
+                  request->send(200, "text/plain", "Built-in LED turned on"); });
+
+    // Turning the built-in LED off
+
+    server.on("/builtinLed/off", HTTP_GET, [](AsyncWebServerRequest *request)
+              {
+                  digitalWrite(builtInLedPin, LOW);
+
+                  request->send(200, "text/plain", "Built-in LED turned off");
+              });
+
     server.begin();
-    Serial.println("Server started");
-    return server;
 }
