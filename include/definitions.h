@@ -11,13 +11,13 @@
 #define INFLUXDB_BUCKET "HACKUPC2024"
 
 // Flame Sensor variables
-uint8_t Flame_An_Pin = 32;
-uint8_t Flame_Dg_Pin = 0;
+#define FLAME_AN_PIN 32u
+#define FLAME_DG_PIN 0u
 // Sound Sensor variables
-uint8_t Sound_An_Pin = 33;
-uint8_t Sound_Dg_Pin = 0;
+#define SOUND_AN_PIN 33u
+#define SOUND_DG_PIN 0u
 // Temp & Humidity Sensor variables
-uint8_t Temp_Hum_Pin = 25;
-uint8_t DHTType = 11U;
+#define TEMP_HUM_PIN 25u
+#define DHTTYPE 11U
 // Buzzer variables
-uint8_t Buzzer_Pin = 26;
+#define BUZZER_PIN 26u
