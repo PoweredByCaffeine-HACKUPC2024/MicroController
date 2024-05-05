@@ -10,17 +10,18 @@ class ky006
 {
 private:
     uint8_t pin;
-    uint8_t frequency;
+    uint16_t frequency;
     boolean active;
 
 public:
-    ky006(uint8_t pin, uint8_t frequency);
+    ky006(uint8_t pin, uint16_t frequency);
     ky006(uint8_t pin);
 
     void setup();
-    void setFrequency(uint8_t frequency);
+    void setFrequency(uint16_t frequency);
     void setActive(boolean active);
-    uint8_t getFrequency();
+    uint16_t getFrequency();
+    boolean getActive();
 
     void buzzerMain();
 };

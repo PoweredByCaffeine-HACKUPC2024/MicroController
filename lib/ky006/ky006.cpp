@@ -1,6 +1,6 @@
 #include "ky006.h"
 
-ky006::ky006(uint8_t pin, uint8_t frequency)
+ky006::ky006(uint8_t pin, uint16_t frequency)
 {
     this->pin = pin;
     this->frequency = frequency;
@@ -19,7 +19,7 @@ void ky006::setup()
     pinMode(this->pin, OUTPUT);
 }
 
-void ky006::setFrequency(uint8_t frequency)
+void ky006::setFrequency(uint16_t frequency)
 {
     this->frequency = frequency;
 }
@@ -27,11 +27,14 @@ void ky006::setActive(boolean active)
 {
     this->active = active;
 }
-uint8_t ky006::getFrequency()
+uint16_t ky006::getFrequency()
 {
     return frequency;
 }
-
+boolean ky006::getActive()
+{
+    return active;
+}
 void ky006::buzzerMain()
 {
     static uint8_t state = LOW;

@@ -142,8 +142,26 @@ void WiFiConnection::startServer(AsyncWebServer &server)
               {
                   digitalWrite(builtInLedPin, LOW);
 
-                  request->send(200, "text/plain", "Built-in LED turned off");
-              });
+                  request->send(200, "text/plain", "Built-in LED turned off"); });
+
+    server.on("/BuzzerAct/on", HTTP_GET, [](AsyncWebServerRequest *request)
+              {
+               BuzzerActive = true;
+
+               request ->send(200, "text/plain", "Buzzer Activated"); });
+
+    server.on("/BuzzerAct/off", HTTP_GET, [](AsyncWebServerRequest *request)
+              {
+               BuzzerActive = false;
+
+               request ->send(200, "text/plain", "Buzzer Activated"); });
+
+    server.on("/BuzzerAct/set-frequency", HTTP_POST, [](AsyncWebServerRequest *request)
+              {
+                  int number = request->arg("frequency").toInt();
+                  buzzerFrequency = number;
+
+                  request->send(200, "text/plain", "Frequency set to: " + String(buzzerFrequency)); });
 
     server.begin();
 }

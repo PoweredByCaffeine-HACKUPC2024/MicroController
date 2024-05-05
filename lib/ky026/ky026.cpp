@@ -25,31 +25,6 @@ ky026::ky026(uint8_t analogPin, uint8_t digitalPin)
 }
 
 /**!
- *  @brief  Instanciates a new ky026 class
- *  @param  pin     Pin number for the KY-026 is connected to.
- *  @param  type    Char to determine analog or digital pin
- *
- *  @note   Sets analogValue to 0 and digitalValue to LOW
- *  @note   Sets digitalPin to 0
- *
- */
-ky026::ky026(uint8_t pin, char type)
-{
-    if (type == 'd' || type == 'D')
-    {
-        this->digitalPin = pin;
-        this->analogPin = 0;
-    }
-    else if (type == 'a' || type == 'A')
-    {
-        this->analogPin = pin;
-        this->digitalPin = 0;
-    }
-    this->analogValue = 0;
-    this->digitalValue = LOW;
-}
-
-/**!
  *  @brief  Setup sensor pins
  *  @note   If analogPin is not 0; sets analogPin to INPUT.
  *  @note   If digitalPin is not 0; sets digitalPin to INPUT.
